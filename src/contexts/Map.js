@@ -1,11 +1,27 @@
-import React from 'react';
+import { createContext, useState } from "react"
+import barsMap from "../bars.json"
 
-const Map = () => {
+const MapContext = createContext({})
+
+const MapContextProvider = props => {
+    const [location, setLocation] = useState(null)
+    const [bars, setBars] = useState(barsMap)
+
+    const value = {
+        location: location,
+        bars: bars
+    }
+
+    console.log(bars, location)
+
     return (
-        <div>
-            <h1>Map</h1>
-        </div>
+        <MapContext.Provider value={value}>
+            {props.children}
+        </MapContext.Provider>
     );
 };
 
-export default Map;
+export {
+    MapContextProvider,
+    MapContext
+  }

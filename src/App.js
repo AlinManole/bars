@@ -1,12 +1,12 @@
 import React from 'react';
+import { MapContextProvider } from './contexts/Map';
 
-import Map from './contexts/Map';
 
 const App = () => {
   return (
     <div>
       <h1>hello</h1>
-      <Map />
+      <MapContextProvider />
     </div>
   );
 };
