@@ -1,4 +1,4 @@
-import { createContext, useState } from "react"
+import { createContext, useState, useEffect, useContext } from "react"
 import barsMap from "../bars.json"
 
 const MapContext = createContext({})
@@ -12,7 +12,25 @@ const MapContextProvider = props => {
         bars: bars
     }
 
-    console.log(bars, location)
+    useEffect(() => {
+        console.log("Récupération de la localisation...")
+    
+        navigator.geolocation.getCurrentPosition(
+          location => {
+            setLocation({
+              lat: location.coords.latitude,
+              lng: location.coords.longitude
+            })
+          },
+          error => {
+            console.log(error)
+          }
+        )
+      }, [])
+
+
+    console.log("My Location ", location)
+   
 
     return (
         <MapContext.Provider value={value}>
